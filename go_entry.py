@@ -3,6 +3,7 @@
 # (c) Hex-Rays
 #
 import GO_Utils
+import idaapi
 idaapi.require("GO_Utils")
 idaapi.require("GO_Utils.Gopclntab")
 idaapi.require("GO_Utils.Utils")
@@ -21,7 +22,6 @@ class MyForm(Form):
         self.invert = False
         Form.__init__(self, r"""STARTITEM {id:cGoVers}
 GoLoader
-
 {FormChangeCb}
 <##Try to detemine go version based on moduledata:{iButton1}>
 <##Try to detemine go version based on version string:{iButton2}>
@@ -50,14 +50,14 @@ Go version:
 
     def OnButton1(self, code=0):
         GO_SETTINGS.findModuleData()
-        print GO_SETTINGS.tryFindGoVersion()
+        print(GO_SETTINGS.tryFindGoVersion())
 
 
     def OnButton3(self, code=0):
         GO_SETTINGS.renameFunctions()
 
     def OnButton2(self, code=0):
-        print GO_SETTINGS.getVersionByString()
+        print(GO_SETTINGS.getVersionByString())
 
     def OnButton4(self, code=0):
         typ =  self.GetControlValue(self.cGoVers)
